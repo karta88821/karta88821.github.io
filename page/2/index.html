@@ -29,33 +29,28 @@
 
   gtag('config', 'G-WQXV8TK3Z9');
 </script>
-  <meta name="description" content="題目描述Given a string s, return the longest palindromic substring in s. Example 1: Input: s &#x3D; “babad”Output: “bab”Explanation: “aba” is also a valid answer.Example 2: Input: s &#x3D; “cbbd”Output: “">
-<meta property="og:type" content="article">
-<meta property="og:title" content="56-5. Longest Palindromic Substring">
-<meta property="og:url" content="http://example.com/2025/01/03/56-5-Longest-Palindromic-Substring/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Daniel技術筆記">
+<meta property="og:url" content="http://example.com/page/2/index.html">
 <meta property="og:site_name" content="Daniel技術筆記">
-<meta property="og:description" content="題目描述Given a string s, return the longest palindromic substring in s. Example 1: Input: s &#x3D; “babad”Output: “bab”Explanation: “aba” is also a valid answer.Example 2: Input: s &#x3D; “cbbd”Output: “">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2025-01-02T16:18:29.000Z">
-<meta property="article:modified_time" content="2025-01-02T16:38:35.871Z">
 <meta property="article:author" content="Daniel Liao">
-<meta property="article:tag" content="two-pointers">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2025/01/03/56-5-Longest-Palindromic-Substring/">
+<link rel="canonical" href="http://example.com/page/2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
-    isPost : true,
+    isHome : true,
+    isPost : false,
     lang   : 'zh-TW'
   };
 </script>
 
-  <title>56-5. Longest Palindromic Substring | Daniel技術筆記</title>
+  <title>Daniel技術筆記</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WQXV8TK3Z9"></script>
     <script>
@@ -178,14 +173,13 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content index posts-expand">
             
-
-    
+      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/01/03/56-5-Longest-Palindromic-Substring/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/28/52-8.%20String%20to%20Integer%20(atoi)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -197,9 +191,10 @@
       <meta itemprop="name" content="Daniel技術筆記">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          56-5. Longest Palindromic Substring
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/12/28/52-8.%20String%20to%20Integer%20(atoi)/" class="post-title-link" itemprop="url">52-8. String to Integer (atoi)</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -207,10 +202,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2025-01-03 00:18:29 / 修改時間：00:38:35" itemprop="dateCreated datePublished" datetime="2025-01-03T00:18:29+08:00">2025-01-03</time>
+              <time title="創建時間：2024-12-28 23:37:46" itemprop="dateCreated datePublished" datetime="2024-12-28T23:37:46+08:00">2024-12-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2024-12-30 22:44:48" itemprop="dateModified" datetime="2024-12-30T22:44:48+08:00">2024-12-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -232,57 +233,125 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="題目描述"><a href="#題目描述" class="headerlink" title="題目描述"></a>題目描述</h2><p>Given a string s, return the longest palindromic substring in <code>s</code>.</p>
-<p>Example 1:</p>
-<p>Input: s &#x3D; “babad”<br>Output: “bab”<br>Explanation: “aba” is also a valid answer.<br>Example 2:</p>
-<p>Input: s &#x3D; “cbbd”<br>Output: “bb”</p>
-<p>Constraints:</p>
-<p>1 &lt;&#x3D; s.length &lt;&#x3D; 1000<br>s consist of only digits and English letters.</p>
-<span id="more"></span>
-
-<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>符合palindrome的字串長度可能會是odd（奇數）或even（偶數）:</p>
-<ul>
-<li>odd palindrome: “aba”, “c”, “abcba”</li>
-<li>even palindrome: “”, “aa”, “abba”</li>
-</ul>
-<p>因此我們只需要將<code>s</code>中的每個字符都去計算odd palindrome和even palindrome，然後順便更新結果即可。</p>
-<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><h2 id="1-Two-pointers"><a href="#1-Two-pointers" class="headerlink" title="1. Two pointers"></a>1. Two pointers</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestPalindrome</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># find longest palindrome with two pointer, from inside to outside</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">palindrome</span>(<span class="params">i, j</span>):</span><br><span class="line">            <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">and</span> j &lt; n <span class="keyword">and</span> s[i] == s[j]:</span><br><span class="line">                i -= <span class="number">1</span></span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> i+<span class="number">1</span>, j-<span class="number">1</span> <span class="comment"># [i+1:j-1]</span></span><br><span class="line">        </span><br><span class="line">        start, end = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> pos <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="comment"># find longest palindrome start from pos and pos, this would be odd length</span></span><br><span class="line">            <span class="comment"># than update start and end</span></span><br><span class="line">            i, j = palindrome(pos, pos)</span><br><span class="line">            <span class="keyword">if</span> j - i + <span class="number">1</span> &gt; end - start + <span class="number">1</span>:</span><br><span class="line">                start = i</span><br><span class="line">                end = j</span><br><span class="line"></span><br><span class="line">            <span class="comment"># find longest palindrome start from pos and pos + 1, this would be even length</span></span><br><span class="line">            <span class="comment"># than update start and end</span></span><br><span class="line">            x, y = palindrome(pos, pos+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">if</span> y - x + <span class="number">1</span> &gt; end - start + <span class="number">1</span>:</span><br><span class="line">                start = x</span><br><span class="line">                end = y            </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> s[start:end+<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-<h3 id="Time-complexity-O-n-2"><a href="#Time-complexity-O-n-2" class="headerlink" title="Time complexity: O(n^2)"></a>Time complexity: O(n^2)</h3><ul>
-<li>對於s中的每個字符，都要去計算由該字符的odd longest palindrome和even longest palindrome。</li>
-</ul>
-<h3 id="Space-complexity-O-1"><a href="#Space-complexity-O-1" class="headerlink" title="Space complexity: O(1)"></a>Space complexity: O(1)</h3>
+          <h2 id="題目描述"><a href="#題目描述" class="headerlink" title="題目描述"></a>題目描述</h2><p>Implement the <code>myAtoi(string s)</code> function, which converts a string to a 32-bit signed integer.</p>
+<p>The algorithm for <code>myAtoi(string s)</code> is as follows:</p>
+<ol>
+<li><strong>Whitespace</strong>: Ignore any leading whitespace (<code>&quot; &quot;</code>).</li>
+<li><strong>Signedness</strong>: Determine the sign by checking if the next character is <code>&#39;-&#39;</code> or <code>&#39;+&#39;</code>, assuming positivity if neither present.</li>
+<li><strong>Conversion</strong>: Read the integer by skipping leading zeros until a non-digit character is encountered or the end of the string is reached. If no digits were read, then the result is 0.</li>
+<li><strong>Rounding</strong>: If the integer is out of the 32-bit signed integer range <code>[-231, 231 - 1]</code>, then round the integer to remain in the range. Specifically, integers less than <code>-231</code> should be rounded to <code>-231</code>, and integers greater than <code>231 - 1</code> should be rounded to <code>231 - 1</code>.</li>
+</ol>
+<p>Return the integer as the final result.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/28/52-8.%20String%20to%20Integer%20(atoi)/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
 
     
     
     
-
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/two-pointers/" rel="tag"># two-pointers</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2024/12/30/55-199-Binary-Tree-Right-Side-View/" rel="prev" title="55-199. Binary Tree Right Side View">
-      <i class="fa fa-chevron-left"></i> 55-199. Binary Tree Right Side View
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/01/03/57-62-Unique-Path/" rel="next" title="56-62. Unique Path">
-      56-62. Unique Path <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
+        <div class="post-eof"></div>
       </footer>
-    
   </article>
   
   
   
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/25/51-416-Partition-Equal-Subset-Sum/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Daniel Liao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daniel技術筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/12/25/51-416-Partition-Equal-Subset-Sum/" class="post-title-link" itemprop="url">51-416. Partition Equal Subset Sum</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2024-12-25 23:37:46" itemprop="dateCreated datePublished" datetime="2024-12-25T23:37:46+08:00">2024-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2024-12-30 22:45:51" itemprop="dateModified" datetime="2024-12-30T22:45:51+08:00">2024-12-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/grind75/" itemprop="url" rel="index"><span itemprop="name">grind75</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="題目描述"><a href="#題目描述" class="headerlink" title="題目描述"></a>題目描述</h2><p>Given an integer array <code>nums</code>, return <code>true</code> <em>if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or</em> <code>false</code> <em>otherwise</em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [1,5,11,5]</span><br><span class="line">Output: true</span><br><span class="line">Explanation: The array can be partitioned as [1, 5, 5] and [11].</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/25/51-416-Partition-Equal-Subset-Sum/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 
 
@@ -334,7 +403,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%8C%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">題目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%83%B3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Two-pointers"><span class="nav-number">4.</span> <span class="nav-text">1. Two pointers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-complexity-O-n-2"><span class="nav-number">4.1.</span> <span class="nav-text">Time complexity: O(n^2)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Space-complexity-O-1"><span class="nav-number">4.2.</span> <span class="nav-text">Space complexity: O(1)</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

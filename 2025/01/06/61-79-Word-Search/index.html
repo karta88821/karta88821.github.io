@@ -29,20 +29,21 @@
 
   gtag('config', 'G-WQXV8TK3Z9');
 </script>
-  <meta name="description" content="題目描述Given a string s, return the longest palindromic substring in s. Example 1: Input: s &#x3D; “babad”Output: “bab”Explanation: “aba” is also a valid answer.Example 2: Input: s &#x3D; “cbbd”Output: “">
+  <meta name="description" content="題目描述Given an m x n grid of characters board and a string word, return true if word exists in the grid. The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are">
 <meta property="og:type" content="article">
-<meta property="og:title" content="56-5. Longest Palindromic Substring">
-<meta property="og:url" content="http://example.com/2025/01/03/56-5-Longest-Palindromic-Substring/index.html">
+<meta property="og:title" content="61-79. Word Search">
+<meta property="og:url" content="http://example.com/2025/01/06/61-79-Word-Search/index.html">
 <meta property="og:site_name" content="Daniel技術筆記">
-<meta property="og:description" content="題目描述Given a string s, return the longest palindromic substring in s. Example 1: Input: s &#x3D; “babad”Output: “bab”Explanation: “aba” is also a valid answer.Example 2: Input: s &#x3D; “cbbd”Output: “">
+<meta property="og:description" content="題目描述Given an m x n grid of characters board and a string word, return true if word exists in the grid. The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2025-01-02T16:18:29.000Z">
-<meta property="article:modified_time" content="2025-01-02T16:38:35.871Z">
+<meta property="article:published_time" content="2025-01-06T07:17:22.000Z">
+<meta property="article:modified_time" content="2025-01-06T04:29:32.404Z">
 <meta property="article:author" content="Daniel Liao">
-<meta property="article:tag" content="two-pointers">
+<meta property="article:tag" content="array">
+<meta property="article:tag" content="dfs">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2025/01/03/56-5-Longest-Palindromic-Substring/">
+<link rel="canonical" href="http://example.com/2025/01/06/61-79-Word-Search/">
 
 
 <script id="page-configurations">
@@ -55,7 +56,7 @@
   };
 </script>
 
-  <title>56-5. Longest Palindromic Substring | Daniel技術筆記</title>
+  <title>61-79. Word Search | Daniel技術筆記</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WQXV8TK3Z9"></script>
     <script>
@@ -185,7 +186,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/01/03/56-5-Longest-Palindromic-Substring/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/01/06/61-79-Word-Search/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -198,7 +199,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          56-5. Longest Palindromic Substring
+          61-79. Word Search
         </h1>
 
         <div class="post-meta">
@@ -209,7 +210,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2025-01-03 00:18:29 / 修改時間：00:38:35" itemprop="dateCreated datePublished" datetime="2025-01-03T00:18:29+08:00">2025-01-03</time>
+              <time title="創建時間：2025-01-06 15:17:22 / 修改時間：12:29:32" itemprop="dateCreated datePublished" datetime="2025-01-06T15:17:22+08:00">2025-01-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -232,26 +233,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="題目描述"><a href="#題目描述" class="headerlink" title="題目描述"></a>題目描述</h2><p>Given a string s, return the longest palindromic substring in <code>s</code>.</p>
+        <h2 id="題目描述"><a href="#題目描述" class="headerlink" title="題目描述"></a>題目描述</h2><p>Given an m x n grid of characters board and a string word, return true if word exists in the grid.</p>
+<p>The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.</p>
 <p>Example 1:</p>
-<p>Input: s &#x3D; “babad”<br>Output: “bab”<br>Explanation: “aba” is also a valid answer.<br>Example 2:</p>
-<p>Input: s &#x3D; “cbbd”<br>Output: “bb”</p>
-<p>Constraints:</p>
-<p>1 &lt;&#x3D; s.length &lt;&#x3D; 1000<br>s consist of only digits and English letters.</p>
+<p>Input: board &#x3D; [[“A”,”B”,”C”,”E”],[“S”,”F”,”C”,”S”],[“A”,”D”,”E”,”E”]], word &#x3D; “ABCCED”<br>Output: true</p>
 <span id="more"></span>
+<p>Example 2:</p>
+<p>Input: board &#x3D; [[“A”,”B”,”C”,”E”],[“S”,”F”,”C”,”S”],[“A”,”D”,”E”,”E”]], word &#x3D; “SEE”<br>Output: true<br>Example 3:</p>
+<p>Input: board &#x3D; [[“A”,”B”,”C”,”E”],[“S”,”F”,”C”,”S”],[“A”,”D”,”E”,”E”]], word &#x3D; “ABCB”<br>Output: false</p>
+<p>Constraints:</p>
+<p>m &#x3D;&#x3D; board.length<br>n &#x3D; board[i].length<br>1 &lt;&#x3D; m, n &lt;&#x3D; 6<br>1 &lt;&#x3D; word.length &lt;&#x3D; 15<br>board and word consists of only lowercase and uppercase English letters.</p>
+<p>Follow up: Could you use search pruning to make your solution faster with a larger board?</p>
+<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><h2 id="1-DFS"><a href="#1-DFS" class="headerlink" title="1. DFS"></a>1. DFS</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">exist</span>(<span class="params">self, board: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]], word: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        m, n = <span class="built_in">len</span>(board), <span class="built_in">len</span>(board[<span class="number">0</span>])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">find</span>(<span class="params">pos, i, j</span>):</span><br><span class="line">            <span class="keyword">if</span> pos == <span class="built_in">len</span>(word):</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">                </span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> (i &gt;= <span class="number">0</span> <span class="keyword">and</span> i &lt; m <span class="keyword">and</span> j &gt;= <span class="number">0</span> <span class="keyword">and</span> j &lt; n):</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">if</span> board[i][j] == <span class="string">&#x27;#&#x27;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> board[i][j] == word[pos]:</span><br><span class="line">                original_char = board[i][j]</span><br><span class="line">                board[i][j] = <span class="string">&#x27;#&#x27;</span></span><br><span class="line">                res = find(pos+<span class="number">1</span>, i+<span class="number">1</span>, j) <span class="keyword">or</span> find(pos+<span class="number">1</span>, i-<span class="number">1</span>, j) <span class="keyword">or</span> find(pos+<span class="number">1</span>, i, j-<span class="number">1</span>) <span class="keyword">or</span> find(pos+<span class="number">1</span>, i, j+<span class="number">1</span>)</span><br><span class="line">                board[i][j] = original_char</span><br><span class="line">                <span class="keyword">return</span> res</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br><span class="line">        existed = <span class="literal">False</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                <span class="keyword">if</span> find(<span class="number">0</span>, i, j):</span><br><span class="line">                    existed = <span class="literal">True</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> existed</span><br></pre></td></tr></table></figure>
 
-<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>符合palindrome的字串長度可能會是odd（奇數）或even（偶數）:</p>
-<ul>
-<li>odd palindrome: “aba”, “c”, “abcba”</li>
-<li>even palindrome: “”, “aa”, “abba”</li>
-</ul>
-<p>因此我們只需要將<code>s</code>中的每個字符都去計算odd palindrome和even palindrome，然後順便更新結果即可。</p>
-<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><h2 id="1-Two-pointers"><a href="#1-Two-pointers" class="headerlink" title="1. Two pointers"></a>1. Two pointers</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestPalindrome</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># find longest palindrome with two pointer, from inside to outside</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">palindrome</span>(<span class="params">i, j</span>):</span><br><span class="line">            <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">and</span> j &lt; n <span class="keyword">and</span> s[i] == s[j]:</span><br><span class="line">                i -= <span class="number">1</span></span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> i+<span class="number">1</span>, j-<span class="number">1</span> <span class="comment"># [i+1:j-1]</span></span><br><span class="line">        </span><br><span class="line">        start, end = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> pos <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="comment"># find longest palindrome start from pos and pos, this would be odd length</span></span><br><span class="line">            <span class="comment"># than update start and end</span></span><br><span class="line">            i, j = palindrome(pos, pos)</span><br><span class="line">            <span class="keyword">if</span> j - i + <span class="number">1</span> &gt; end - start + <span class="number">1</span>:</span><br><span class="line">                start = i</span><br><span class="line">                end = j</span><br><span class="line"></span><br><span class="line">            <span class="comment"># find longest palindrome start from pos and pos + 1, this would be even length</span></span><br><span class="line">            <span class="comment"># than update start and end</span></span><br><span class="line">            x, y = palindrome(pos, pos+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">if</span> y - x + <span class="number">1</span> &gt; end - start + <span class="number">1</span>:</span><br><span class="line">                start = x</span><br><span class="line">                end = y            </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> s[start:end+<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-<h3 id="Time-complexity-O-n-2"><a href="#Time-complexity-O-n-2" class="headerlink" title="Time complexity: O(n^2)"></a>Time complexity: O(n^2)</h3><ul>
-<li>對於s中的每個字符，都要去計算由該字符的odd longest palindrome和even longest palindrome。</li>
-</ul>
-<h3 id="Space-complexity-O-1"><a href="#Space-complexity-O-1" class="headerlink" title="Space complexity: O(1)"></a>Space complexity: O(1)</h3>
+<h3 id="Time-complexity-O-mn-4-k-where-k-is-word-length"><a href="#Time-complexity-O-mn-4-k-where-k-is-word-length" class="headerlink" title="Time complexity: O(mn*4^k), where k is word length"></a>Time complexity: O(mn*4^k), where k is word length</h3><h3 id="Space-complexity-O-k-where-k-is-word-length"><a href="#Space-complexity-O-k-where-k-is-word-length" class="headerlink" title="Space complexity: O(k), where k is word length"></a>Space complexity: O(k), where k is word length</h3>
     </div>
 
     
@@ -260,7 +255,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/two-pointers/" rel="tag"># two-pointers</a>
+              <a href="/tags/array/" rel="tag"># array</a>
+              <a href="/tags/dfs/" rel="tag"># dfs</a>
           </div>
 
         
@@ -269,13 +265,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/12/30/55-199-Binary-Tree-Right-Side-View/" rel="prev" title="55-199. Binary Tree Right Side View">
-      <i class="fa fa-chevron-left"></i> 55-199. Binary Tree Right Side View
+    <a href="/2025/01/06/60-17-Letter-Combinations-of-a-Phone-Number/" rel="prev" title="60-79. Word Search">
+      <i class="fa fa-chevron-left"></i> 60-79. Word Search
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/01/03/57-62-Unique-Path/" rel="next" title="56-62. Unique Path">
-      56-62. Unique Path <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -334,7 +327,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%8C%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">題目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%83%B3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Two-pointers"><span class="nav-number">4.</span> <span class="nav-text">1. Two pointers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-complexity-O-n-2"><span class="nav-number">4.1.</span> <span class="nav-text">Time complexity: O(n^2)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Space-complexity-O-1"><span class="nav-number">4.2.</span> <span class="nav-text">Space complexity: O(1)</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%8C%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">題目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%83%B3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-DFS"><span class="nav-number">4.</span> <span class="nav-text">1. DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-complexity-O-mn-4-k-where-k-is-word-length"><span class="nav-number">4.1.</span> <span class="nav-text">Time complexity: O(mn*4^k), where k is word length</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Space-complexity-O-k-where-k-is-word-length"><span class="nav-number">4.2.</span> <span class="nav-text">Space complexity: O(k), where k is word length</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
