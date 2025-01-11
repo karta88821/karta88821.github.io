@@ -29,23 +29,20 @@
 
   gtag('config', 'G-WQXV8TK3Z9');
 </script>
-  <meta name="description" content="題目描述Example 1:  12Input: matrix &#x3D; [[1,2,3],[4,5,6],[7,8,9]]Output: [1,2,3,6,9,8,7,4,5]">
+  <meta name="description" content="題目描述You are given an array of CPU tasks, each labeled with a letter from A to Z, and a number n. Each CPU interval can be idle or allow the completion of one task. Tasks can be completed in any order,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="53-54. Spiral Matrix">
-<meta property="og:url" content="http://example.com/2024/12/29/53-54.%20Spiral%20Matrix/index.html">
+<meta property="og:title" content="64-621. Task Scheduler">
+<meta property="og:url" content="http://example.com/2025/01/12/64-621-Task-Scheduler/index.html">
 <meta property="og:site_name" content="Daniel技術筆記">
-<meta property="og:description" content="題目描述Example 1:  12Input: matrix &#x3D; [[1,2,3],[4,5,6],[7,8,9]]Output: [1,2,3,6,9,8,7,4,5]">
+<meta property="og:description" content="題目描述You are given an array of CPU tasks, each labeled with a letter from A to Z, and a number n. Each CPU interval can be idle or allow the completion of one task. Tasks can be completed in any order,">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/13/spiral1.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/13/spiral.jpg">
-<meta property="article:published_time" content="2024-12-29T13:14:29.000Z">
-<meta property="article:modified_time" content="2024-12-30T14:44:34.930Z">
+<meta property="article:published_time" content="2025-01-11T16:12:22.000Z">
+<meta property="article:modified_time" content="2025-01-11T17:18:59.230Z">
 <meta property="article:author" content="Daniel Liao">
-<meta property="article:tag" content="array">
+<meta property="article:tag" content="greedy">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/11/13/spiral1.jpg">
 
-<link rel="canonical" href="http://example.com/2024/12/29/53-54.%20Spiral%20Matrix/">
+<link rel="canonical" href="http://example.com/2025/01/12/64-621-Task-Scheduler/">
 
 
 <script id="page-configurations">
@@ -58,7 +55,7 @@
   };
 </script>
 
-  <title>53-54. Spiral Matrix | Daniel技術筆記</title>
+  <title>64-621. Task Scheduler | Daniel技術筆記</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WQXV8TK3Z9"></script>
     <script>
@@ -188,7 +185,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/29/53-54.%20Spiral%20Matrix/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/01/12/64-621-Task-Scheduler/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -201,7 +198,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          53-54. Spiral Matrix
+          64-621. Task Scheduler
         </h1>
 
         <div class="post-meta">
@@ -210,16 +207,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
+              
 
-              <time title="創建時間：2024-12-29 21:14:29" itemprop="dateCreated datePublished" datetime="2024-12-29T21:14:29+08:00">2024-12-29</time>
+              <time title="創建時間：2025-01-12 00:12:22 / 修改時間：01:18:59" itemprop="dateCreated datePublished" datetime="2025-01-12T00:12:22+08:00">2025-01-12</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-12-30 22:44:34" itemprop="dateModified" datetime="2024-12-30T22:44:34+08:00">2024-12-30</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -241,35 +232,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="題目描述"><a href="#題目描述" class="headerlink" title="題目描述"></a>題目描述</h2><p><strong>Example 1:</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2020/11/13/spiral1.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">Output: [1,2,3,6,9,8,7,4,5]</span><br></pre></td></tr></table></figure>
-
+        <h2 id="題目描述"><a href="#題目描述" class="headerlink" title="題目描述"></a>題目描述</h2><p>You are given an array of CPU <code>tasks</code>, each labeled with a letter from A to Z, and a number <code>n</code>. Each CPU interval can be idle or allow the completion of one task. Tasks can be completed in any order, but there’s a constraint: there has to be a gap of <strong>at least</strong> <code>n</code> intervals between two tasks with the same label.</p>
+<p>Return the <strong>minimum</strong> number of CPU intervals required to complete all tasks. </p>
+<p><strong>Example 1:</strong></p>
+<p><strong>Input:</strong> tasks &#x3D; [“A”,”A”,”A”,”B”,”B”,”B”], n &#x3D; 2</p>
+<p><strong>Output:</strong> 8</p>
+<p><strong>Explanation:</strong> A possible sequence is: A -&gt; B -&gt; idle -&gt; A -&gt; B -&gt; idle -&gt; A -&gt; B.</p>
+<p>After completing task A, you must wait two intervals before doing A again. The same applies to task B. In the 3rd interval, neither A nor B can be done, so you idle. By the 4th interval, you can do A again as 2 intervals have passed.</p>
 <span id="more"></span>
 
-
 <p><strong>Example 2:</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2020/11/13/spiral.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]</span><br><span class="line">Output: [1,2,3,4,8,12,11,10,9,5,6,7]</span><br></pre></td></tr></table></figure>
-
+<p><strong>Input:</strong> tasks &#x3D; [“A”,”C”,”A”,”B”,”D”,”B”], n &#x3D; 1</p>
+<p><strong>Output:</strong> 6</p>
+<p><strong>Explanation:</strong> A possible sequence is: A -&gt; B -&gt; C -&gt; D -&gt; A -&gt; B.</p>
+<p>With a cooling interval of 1, you can repeat a task after just one other task.</p>
+<p><strong>Example 3:</strong></p>
+<p><strong>Input:</strong> tasks &#x3D; [“A”,”A”,”A”, “B”,”B”,”B”], n &#x3D; 3</p>
+<p><strong>Output:</strong> 10</p>
+<p><strong>Explanation:</strong> A possible sequence is: A -&gt; B -&gt; idle -&gt; idle -&gt; A -&gt; B -&gt; idle -&gt; idle -&gt; A -&gt; B.</p>
+<p>There are only two types of tasks, A and B, which need to be separated by 3 intervals. This leads to idling twice between repetitions of these tasks.</p>
 <p><strong>Constraints:</strong></p>
 <ul>
-<li><p><code>m == matrix.length</code></p>
-</li>
-<li><p><code>n == matrix[i].length</code></p>
-</li>
-<li><p><code>1 &lt;= m, n &lt;= 10</code></p>
-</li>
-<li><p><code>-100 &lt;= matrix[i][j] &lt;= 100</code></p>
-</li>
-<li><h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><h2 id="1-Brute-Force"><a href="#1-Brute-Force" class="headerlink" title="1. Brute Force"></a>1. Brute Force</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">spiralOrder</span>(<span class="params">self, matrix: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        m, n = <span class="built_in">len</span>(matrix), <span class="built_in">len</span>(matrix[<span class="number">0</span>])</span><br><span class="line">        res = []</span><br><span class="line">        col_start, col_end, row_start, row_end = <span class="number">0</span>, n-<span class="number">1</span>, <span class="number">0</span>, m-<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> row_start &lt;= row_end <span class="keyword">and</span> col_start &lt;= col_end:</span><br><span class="line">            <span class="comment"># Go right</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(col_start, col_end+<span class="number">1</span>):</span><br><span class="line">                res.append(matrix[row_start][i])</span><br><span class="line">            row_start += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># Go down</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(row_start, row_end+<span class="number">1</span>):</span><br><span class="line">                res.append(matrix[i][col_end])</span><br><span class="line">            col_end -= <span class="number">1</span></span><br><span class="line">			</span><br><span class="line">            <span class="keyword">if</span> row_start &gt; row_end <span class="keyword">or</span> col_start &gt; col_end: <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># Go left</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(col_end, col_start-<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">                res.append(matrix[row_end][i])</span><br><span class="line">            row_end -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># Go up</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(row_end, row_start-<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">                res.append(matrix[i][col_start])</span><br><span class="line">            col_start += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res  </span><br></pre></td></tr></table></figure>
-
-<p>為何需要在<code># Go left</code>之前檢查邊界條件？</p>
-<p>當經過# Go right和# Go down後，可能會出現single-row或single-col的情況。</p>
-<p>例如<code>matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]</code>，在第一次遍歷後，只剩下6,7，如果在Go right和Go down後沒有檢查邊界條件，會導致6被重複的遍歷。</p>
-<h3 id="Time-complexity-O-n"><a href="#Time-complexity-O-n" class="headerlink" title="Time complexity: O(n)"></a>Time complexity: O(n)</h3><h3 id="Space-complexity-O-1"><a href="#Space-complexity-O-1" class="headerlink" title="Space complexity: O(1)"></a>Space complexity: O(1)</h3></li>
+<li><code>1 &lt;= tasks.length &lt;= 104</code></li>
+<li><code>tasks[i]</code> is an uppercase English letter.</li>
+<li><code>0 &lt;= n &lt;= 100</code></li>
 </ul>
+<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>題目給定一組tasks，並且同一個task必須要間隔<code>n</code>個tasks，若沒有task可排的話就會產生一個idle。</p>
+<p>我們可以先找出在tasks中出現最多次的label，然後先把它排好，此時可以計算出目前的empty slot數量，剩下的labels出現的次數只會小於該label，只要將這些label排到這些empty slot中，最後再去計算出idle數量，而task數+idle數即為最小CPU scheduler intervals。</p>
+<p>用一個例子來說明：tasks &#x3D; [A, A, A, A, B, B, B, C, C], n &#x3D; 3</p>
+<p>A出現最多次，先排好A： A _ _ _ A _ _ _ A _ _ _ A</p>
+<p>接下來把剩餘的label插入到empty slot中，計算出idle數：A B C _ A B C _ A B _ _ A</p>
+<p>則最小CPU scheduler intervals &#x3D; 9 (tasks數) + 4 (idle數) &#x3D; 13</p>
+<p>而出現最多次的label可能會有多個，可以把這些labels當作是一個label，在計算empty slot時要注意。</p>
+<p>比如說tasks &#x3D; [A, A, A, A, B, B, B, B, C, C], n &#x3D; 3</p>
+<p>A和B都出現最多次：A B _ _ A B _ _ A B _ _ A B</p>
+<p>這邊可以發現到empty slot會隨著出現最多次的label數而調整。</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><h2 id="1-Greedy"><a href="#1-Greedy" class="headerlink" title="1. Greedy"></a>1. Greedy</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">leastInterval</span>(<span class="params">self, tasks: <span class="type">List</span>[<span class="built_in">str</span>], n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        count = [<span class="number">0</span>] * <span class="number">26</span></span><br><span class="line">        most_freq = <span class="number">0</span> <span class="comment"># label count appears most frequently</span></span><br><span class="line">        most_freq_number = <span class="number">0</span> <span class="comment"># number of labels that appears most frequently</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> task <span class="keyword">in</span> tasks:</span><br><span class="line">            index = <span class="built_in">ord</span>(task) - <span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>)</span><br><span class="line">            count[index] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> most_freq == count[index]:</span><br><span class="line">                most_freq_number += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> count[index] &gt; most_freq:</span><br><span class="line">                most_freq = count[index]</span><br><span class="line">                most_freq_number = <span class="number">1</span></span><br><span class="line">                </span><br><span class="line">        <span class="comment"># Calculate empty slots</span></span><br><span class="line">        part_count = most_freq - <span class="number">1</span></span><br><span class="line">        part_len = n - (most_freq_number - <span class="number">1</span>)</span><br><span class="line">        empty_slots = part_count * part_len</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Calculate idles</span></span><br><span class="line">        remaining_tasks = <span class="built_in">len</span>(tasks) - most_freq * most_freq_number</span><br><span class="line">        idles = <span class="built_in">max</span>(<span class="number">0</span>, empty_slots - remaining_tasks)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(tasks) + idles</span><br></pre></td></tr></table></figure>
 
+<h3 id="Time-complexity-O-n"><a href="#Time-complexity-O-n" class="headerlink" title="Time complexity: O(n)"></a>Time complexity: O(n)</h3><h3 id="Space-complexity-O-1"><a href="#Space-complexity-O-1" class="headerlink" title="Space complexity: O(1)"></a>Space complexity: O(1)</h3>
     </div>
 
     
@@ -278,7 +278,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/array/" rel="tag"># array</a>
+              <a href="/tags/greedy/" rel="tag"># greedy</a>
           </div>
 
         
@@ -287,12 +287,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/12/28/52-8.%20String%20to%20Integer%20(atoi)/" rel="prev" title="52-8. String to Integer (atoi)">
-      <i class="fa fa-chevron-left"></i> 52-8. String to Integer (atoi)
+    <a href="/2025/01/06/63-310-Minimum-Height-Trees/" rel="prev" title="63-310. Minimum Height Trees">
+      <i class="fa fa-chevron-left"></i> 63-310. Minimum Height Trees
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/12/29/54-78.%20Subsets/" rel="next" title="54-78. Subsets">
-      54-78. Subsets <i class="fa fa-chevron-right"></i>
+    <a href="/2025/01/12/65-146-LRU-Cache/" rel="next" title="65-146. LRU Cache">
+      65-146. LRU Cache <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -352,7 +352,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%8C%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">題目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Brute-Force"><span class="nav-number">3.</span> <span class="nav-text">1. Brute Force</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-complexity-O-n"><span class="nav-number">3.1.</span> <span class="nav-text">Time complexity: O(n)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Space-complexity-O-1"><span class="nav-number">3.2.</span> <span class="nav-text">Space complexity: O(1)</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%8C%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">題目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%83%B3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Greedy"><span class="nav-number">4.</span> <span class="nav-text">1. Greedy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-complexity-O-n"><span class="nav-number">4.1.</span> <span class="nav-text">Time complexity: O(n)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Space-complexity-O-1"><span class="nav-number">4.2.</span> <span class="nav-text">Space complexity: O(1)</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
