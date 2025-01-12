@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WQXV8TK3Z9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WQXV8TK3Z9');
+</script>
+  <meta name="description" content="題目描述Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="66-230. Kth Smallest Element in a BST">
+<meta property="og:url" content="http://example.com/2025/01/12/66-230-Kth%20Smallest%20Element%20in%20a%20BST/index.html">
+<meta property="og:site_name" content="Daniel技術筆記">
+<meta property="og:description" content="題目描述Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/28/kthtree1.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/28/kthtree2.jpg">
+<meta property="article:published_time" content="2025-01-12T12:30:22.000Z">
+<meta property="article:modified_time" content="2025-01-12T15:28:02.976Z">
+<meta property="article:author" content="Daniel Liao">
+<meta property="article:tag" content="binary-search-tree">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/01/28/kthtree1.jpg">
+
+<link rel="canonical" href="http://example.com/2025/01/12/66-230-Kth%20Smallest%20Element%20in%20a%20BST/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>66-230. Kth Smallest Element in a BST | Daniel技術筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WQXV8TK3Z9"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WQXV8TK3Z9');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Daniel技術筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/01/12/66-230-Kth%20Smallest%20Element%20in%20a%20BST/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Daniel Liao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daniel技術筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          66-230. Kth Smallest Element in a BST
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2025-01-12 20:30:22 / 修改時間：23:28:02" itemprop="dateCreated datePublished" datetime="2025-01-12T20:30:22+08:00">2025-01-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/grind75/" itemprop="url" rel="index"><span itemprop="name">grind75</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="題目描述"><a href="#題目描述" class="headerlink" title="題目描述"></a>題目描述</h2><p>Given the <code>root</code> of a binary search tree, and an integer <code>k</code>, return <em>the</em> <code>kth</code> <em>smallest value (<strong>1-indexed</strong>) of all the values of the nodes in the tree</em>.</p>
+<span id="more"></span> 
+
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/01/28/kthtree1.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: root = [3,1,4,null,2], k = 1</span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/01/28/kthtree2.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: root = [5,3,6,2,4,null,null,1], k = 3</span><br><span class="line">Output: 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the tree is <code>n</code>.</li>
+<li><code>1 &lt;= k &lt;= n &lt;= 104</code></li>
+<li><code>0 &lt;= Node.val &lt;= 104</code></li>
+</ul>
+<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>這題核心重點在於：BST的inorder traversal即為ascending order。 </p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><h2 id="1-Inorder-traversal"><a href="#1-Inorder-traversal" class="headerlink" title="1. Inorder traversal"></a>1. Inorder traversal</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">kthSmallest</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">traverse</span>(<span class="params">root</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span> []</span><br><span class="line">            left = traverse(root.left)</span><br><span class="line">            right = traverse(root.right)</span><br><span class="line">            <span class="keyword">return</span> left + [root.val] + right</span><br><span class="line"></span><br><span class="line">        nums = traverse(root)</span><br><span class="line">        <span class="keyword">return</span> nums[k-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Time-complexity-O-n"><a href="#Time-complexity-O-n" class="headerlink" title="Time complexity: O(n)"></a>Time complexity: O(n)</h3><h3 id="Space-complexity-O-n"><a href="#Space-complexity-O-n" class="headerlink" title="Space complexity: O(n)"></a>Space complexity: O(n)</h3><h2 id="2-Inorder-traversal-optimal"><a href="#2-Inorder-traversal-optimal" class="headerlink" title="2. Inorder traversal (optimal)"></a>2. Inorder traversal (optimal)</h2><p>我們可以對解法1進一步做優化，用一個變數<code>order</code>去紀錄目前遍歷的order，當<code>order == k</code>則提前結束遍歷。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">kthSmallest</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="variable language_">self</span>.order = <span class="number">0</span></span><br><span class="line">        <span class="variable language_">self</span>.ans = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">traverse</span>(<span class="params">root</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span></span><br><span class="line">            traverse(root.left)</span><br><span class="line">            <span class="variable language_">self</span>.order += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.order == k:</span><br><span class="line">                <span class="variable language_">self</span>.ans = root.val</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            traverse(root.right)</span><br><span class="line"></span><br><span class="line">        traverse(root)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.ans</span><br></pre></td></tr></table></figure>
+
+<h3 id="Time-complexity-O-n-1"><a href="#Time-complexity-O-n-1" class="headerlink" title="Time complexity: O(n)"></a>Time complexity: O(n)</h3><h3 id="Space-complexity-O-H"><a href="#Space-complexity-O-H" class="headerlink" title="Space complexity: O(H)"></a>Space complexity: O(H)</h3><h2 id="Follow-up"><a href="#Follow-up" class="headerlink" title="Follow up"></a>Follow up</h2><blockquote>
+<p>If the BST is modified often (i.e., we can do insert and delete operations) and you need to find the kth smallest frequently, how would you optimize?</p>
+</blockquote>
+<p>BST如果經常會需要新增或刪除node，我們可以在每個node多紀錄該node為root的subtree node count，然後在新增或刪除node時去動態修改插入或刪除路徑上node的count值。</p>
+<p>而當我們在每個node紀錄自己在inorder traverse的位置，就可以發揮出BST的優勢：在BST搜尋target的時間為O(logn)，而這個target就是node的count。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="variable language_">self</span>.value = value</span><br><span class="line">        <span class="variable language_">self</span>.count = <span class="number">1</span></span><br><span class="line">        <span class="variable language_">self</span>.left = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.riclass Node:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="variable language_">self</span>.value = value</span><br><span class="line">        <span class="variable language_">self</span>.count = <span class="number">1</span>  <span class="comment"># Number of nodes in the subtree rooted at this node</span></span><br><span class="line">        <span class="variable language_">self</span>.left = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.right = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BST</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.root = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">find_k_smallest</span>(<span class="params">self, k</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>._k_smallest(<span class="variable language_">self</span>.root, k)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">insert_value</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="variable language_">self</span>.root = <span class="variable language_">self</span>._insert(<span class="variable language_">self</span>.root, value)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">delete_value</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="variable language_">self</span>.root = <span class="variable language_">self</span>._delete(<span class="variable language_">self</span>.root, value)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_k_smallest</span>(<span class="params">self, root, k</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>  <span class="comment"># Return -1 if k is out of bounds</span></span><br><span class="line">        left_count = <span class="variable language_">self</span>._get_count(root.left)</span><br><span class="line">        <span class="keyword">if</span> k == left_count + <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> root.value</span><br><span class="line">        <span class="keyword">elif</span> k &lt;= left_count:</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>._k_smallest(root.left, k)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>._k_smallest(root.right, k - left_count - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_insert</span>(<span class="params">self, root, value</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> Node(value)</span><br><span class="line">        <span class="keyword">if</span> value &lt; root.value:</span><br><span class="line">            root.left = <span class="variable language_">self</span>._insert(root.left, value)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            root.right = <span class="variable language_">self</span>._insert(root.right, value)</span><br><span class="line">        root.count = <span class="number">1</span> + <span class="variable language_">self</span>._get_count(root.left) + <span class="variable language_">self</span>._get_count(root.right)</span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_delete</span>(<span class="params">self, root, value</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> value &lt; root.value:</span><br><span class="line">            root.left = <span class="variable language_">self</span>._delete(root.left, value)</span><br><span class="line">        <span class="keyword">elif</span> value &gt; root.value:</span><br><span class="line">            root.right = <span class="variable language_">self</span>._delete(root.right, value)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># Node to delete found</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root.left:</span><br><span class="line">                <span class="keyword">return</span> root.right</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root.right:</span><br><span class="line">                <span class="keyword">return</span> root.left</span><br><span class="line">            <span class="comment"># Replace with the inorder successor</span></span><br><span class="line">            successor = <span class="variable language_">self</span>._successor(root)</span><br><span class="line">            root.value = successor.value</span><br><span class="line">            root.right = <span class="variable language_">self</span>._delete(root.right, successor.value)</span><br><span class="line"></span><br><span class="line">        root.count = <span class="number">1</span> + <span class="variable language_">self</span>._get_count(root.left) + <span class="variable language_">self</span>._get_count(root.right)</span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_get_count</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="keyword">return</span> root.count <span class="keyword">if</span> root <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_successor</span>(<span class="params">self, root</span>):</span><br><span class="line">        p = root.right</span><br><span class="line">        <span class="keyword">while</span> p <span class="keyword">and</span> p.left:</span><br><span class="line">            p = p.left</span><br><span class="line">        <span class="keyword">return</span> p</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example usage</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    bst = BST()</span><br><span class="line">    bst.insert_value(<span class="number">5</span>)</span><br><span class="line">    bst.insert_value(<span class="number">3</span>)</span><br><span class="line">    bst.insert_value(<span class="number">6</span>)</span><br><span class="line">    bst.insert_value(<span class="number">2</span>)</span><br><span class="line">    bst.insert_value(<span class="number">4</span>)</span><br><span class="line">    bst.insert_value(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;3rd smallest:&quot;</span>, bst.find_k_smallest(<span class="number">3</span>))  <span class="comment"># Output: 3</span></span><br><span class="line">    bst.delete_value(<span class="number">3</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;3rd smallest after deletion:&quot;</span>, bst.find_k_smallest(<span class="number">3</span>))  <span class="comment"># Output: 4</span></span><br><span class="line">    bst.delete_value(<span class="number">5</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;3rd smallest after deletion:&quot;</span>, bst.find_k_smallest(<span class="number">4</span>))  <span class="comment"># Output: 6</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Time-complexity"><a href="#Time-complexity" class="headerlink" title="Time complexity:"></a>Time complexity:</h3><ul>
+<li><code>insert_value(value)</code>: O(H)</li>
+<li><code>delete_value(value)</code>: O(H)</li>
+<li><code>find_k_smallest(k)</code>: O(H)</li>
+</ul>
+<h3 id="Space-complexity-O-n-1"><a href="#Space-complexity-O-n-1" class="headerlink" title="Space complexity: O(n)"></a>Space complexity: O(n)</h3><ul>
+<li><code>insert_value(value)</code>: O(H)</li>
+<li><code>delete_value(value)</code>: O(H)</li>
+<li><code>find_k_smallest(k)</code>: O(H)</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/binary-search-tree/" rel="tag"># binary-search-tree</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/01/12/65-146-LRU-Cache/" rel="prev" title="65-146. LRU Cache">
+      <i class="fa fa-chevron-left"></i> 65-146. LRU Cache
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%8C%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">題目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%83%B3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Inorder-traversal"><span class="nav-number">4.</span> <span class="nav-text">1. Inorder traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-complexity-O-n"><span class="nav-number">4.1.</span> <span class="nav-text">Time complexity: O(n)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Space-complexity-O-n"><span class="nav-number">4.2.</span> <span class="nav-text">Space complexity: O(n)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Inorder-traversal-optimal"><span class="nav-number">5.</span> <span class="nav-text">2. Inorder traversal (optimal)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-complexity-O-n-1"><span class="nav-number">5.1.</span> <span class="nav-text">Time complexity: O(n)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Space-complexity-O-H"><span class="nav-number">5.2.</span> <span class="nav-text">Space complexity: O(H)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Follow-up"><span class="nav-number">6.</span> <span class="nav-text">Follow up</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-complexity"><span class="nav-number">6.1.</span> <span class="nav-text">Time complexity:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Space-complexity-O-n-1"><span class="nav-number">6.2.</span> <span class="nav-text">Space complexity: O(n)</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Daniel Liao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/daniel-liao-7a0a2a154/" title="daniel-liao → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;daniel-liao-7a0a2a154&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>daniel-liao</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daniel Liao</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
